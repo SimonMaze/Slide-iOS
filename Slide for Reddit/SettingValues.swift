@@ -1340,11 +1340,12 @@ class SettingValues {
 
     public enum CommentJumpMode: String {
         
-        public static let cases: [CommentJumpMode] = [.DISABLED, .LEFT, .RIGHT]
+        public static let cases: [CommentJumpMode] = [.DISABLED, .LEFT, .RIGHT, .CENTER]
         
         case DISABLED = "disabled"
         case LEFT = "left"
         case RIGHT = "right"
+        case CENTER = "center"
         
         func getTitle() -> String {
             switch self {
@@ -1354,6 +1355,8 @@ class SettingValues {
                 return "Left side"
             case .RIGHT:
                 return "Right side"
+            case .CENTER:
+                return "Middle"
             }
         }
     }

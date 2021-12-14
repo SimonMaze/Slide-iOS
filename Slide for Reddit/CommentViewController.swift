@@ -140,10 +140,15 @@ class CommentViewController: MediaViewController, UITableViewDelegate, UITableVi
             
             view.addSubview(jump)
             jump.bottomAnchor /==/ view.bottomAnchor - 24
-            if SettingValues.commentJumpButton == .RIGHT {
+            switch SettingValues.commentJumpButton {
+            case .RIGHT:
                 jump.rightAnchor /==/ view.rightAnchor - 24
-            } else {
+            case .LEFT:
                 jump.leftAnchor /==/ view.leftAnchor + 24
+            case .CENTER:
+                jump.centerXAnchor /==/ view.centerXAnchor
+            case .DISABLED: break
+                
             }
             jump.widthAnchor /==/ 40
             jump.heightAnchor /==/ 40
