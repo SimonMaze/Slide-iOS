@@ -1,0 +1,80 @@
+<select id="country-selector" name="country" onchange="updateProvince(this.value)">
+  {{ country_option_tags }}
+</select>
+
+<select id="province-selector" name="province">
+</select>
+
+<input id="postal-code-input" type="text">
+
+<p onclick="fetchShippingRates('shipping_address%5Bzip%5D=K1N5T2&shipping_address%5Bcountry%5D=Canada&shipping_address%5Bprovince%5D=Ontario')">TEST</p>
+
+<script>
+  function updateProvince(country) {
+    const countryOption = document.querySelector('[value="' + country + '"]');
+    const provinces = JSON.parse(countryOption.getAttribute("data-provinces"));
+    const provinceSelect = document.getElementById("province-selector");
+    provinceSelect.innerHTML = "";
+
+    if (provinces.length > 0) {
+      provinceSelect.style.display = "block";
+      provinces.forEach(province => {
+        const provinceOption = document.createElement("option");
+        provinceOption.value = province[0];
+        provinceOption.innerHTML = province[0];
+        provinceSelect.appendChild(provinceOption);
+      });
+    } else {
+      provinceSelect.style.display = "none";
+    }
+    console.log(provinceSelect.value);
+  }
+
+  function fetchShippingRates(qq) {
+    const country = document.getElementById("country-selector").value;
+    const province = document.getElementById("province-selector").value;
+    const postalCode = document.getElementById("postal-code-input").value;
+    const address = encodeURI("shipping_address[zip]=" + postalCode + "&shipping_address[country]=" + country + "&shipping_address[province]=" + province);
+
+    const urlForAddress = '/cart/prepare_shipping_rates.json?' + address;
+    request = new XMLHttpRequest();
+    request.open('POST', urlForAddress, true);
+    request.onload = function () {
+      console.log(request);
+      if (request.readyState === request.DONE) {
+        if (request.status === 202) {
+          console.log(request.responseText);
+          getShippingRates(address);
+        } else {
+          console.log(request.responseText);
+        }
+      } else {
+        console.log(request.responseText);
+      }
+    };
+    request.send();
+  }
+
+  function getShippingRates(address) {
+    const urlForAddress = '/cart/async_shipping_rates.json?' + address;
+    request = new XMLHttpRequest();
+    request.open('GET', urlForAddress, true);
+    request.onload = function () {
+      console.log(request);
+      if (request.readyState === request.DONE) {
+        if (request.status === 200) {
+          if (request.responseText == null) {
+            console.log("NULL");
+          } else {
+            console.log(request.responseText);
+          }
+        } else {
+          console.log(request.responseText);
+        }
+      } else {
+        console.log(request.responseText);
+      }
+    };
+    request.send();
+  }
+</script>

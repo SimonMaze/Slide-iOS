@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="{{ 'section-text-columns.css' | asset_url }}">
+
+<style>
+  .columns-container {
+    grid-template-columns: repeat({{ section.blocks.size }}, 1fr);
+  }
+</style>
+
+<div class="container">
+
+  {% if section.settings.title != blank %}
+  <h2>{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="columns-container">
+
+    {% for block in section.blocks %}
+    <div class="columns-container__item">
+
+      {% if block.settings.title != blank %}
+      <h3>{{ block.settings.title }}</h3>
+      {% endif %}
+
+      <p>{{ block.settings.text }}</p>
+
+      {% if block.settings.link_label != blank and block.settings.link_url != blank %}
+      <a href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+
+    {% if section.settings.link_label != blank and section.settings.link_url != blank %}
+    <a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>
+    {% endif %}
+
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Text columns",
+  "tag": "section",
+  "class": "text-columns",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link url"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Column",
+      "type": "column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Column content"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text columns",
+      "settings": {
+        "title": "Section title"
+      },
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "Column 1",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum tellus quis pellentesque elementum. Suspendisse pretium lorem et metus facilisis pretium. Proin nec tincidunt.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Column 2",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida rhoncus mauris vitae eleifend. Donec turpis ante, interdum sit amet accumsan a, dictum eget.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Column 3",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nibh mauris, gravida congue leo eu, congue finibus augue. Vestibulum aliquam volutpat ligula, nec tristique.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

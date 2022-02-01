@@ -1,0 +1,160 @@
+<style>
+.band-container {
+  display: inline-block;
+  width: 100vw;
+  white-space: nowrap;
+}
+
+.band-container>div {
+  display: inline-block;
+  width: fit-content;
+  min-width: 50px;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.band-container.left>div {
+  animation-name: word-band-left;
+}
+
+.band-container.right>div {
+  animation-name: word-band-right;
+}
+
+@keyframes word-band-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes word-band-right {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+</style>
+
+{% for block in section.blocks %}
+  <div class="band-container {{ block.settings.direction }}">
+    <div style="animation-duration: {{- 100000 | divided_by: block.settings.speed -}}ms;">{{ block.settings.text }}</div>
+    </div>
+{% endfor %}
+
+<script>
+  function debounce(func, ms) {
+  let timeout
+  return () => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      timeout = null
+      func()
+    }, ms)
+  }
+}
+
+  setWordBand();
+
+  window.addEventListener("resize", function() {
+    setWordBand();
+  });
+
+  function setWordBand() {
+    document.querySelectorAll('.band-container').forEach(e => {
+    var itemElement = e.firstElementChild.cloneNode(true);
+    const widthRatio = window.outerWidth / e.firstElementChild.offsetWidth;
+    e.innerHTML = "";
+    for (var i = 0; i < widthRatio + 1; i++) {
+      e.append(itemElement.cloneNode(true));
+    }
+  });
+}
+
+  if (Shopify.designMode) {
+    document.addEventListener("shopify:section:load", function() {
+      document.querySelectorAll('.band-container').forEach(e => {
+        for (var i = 0; i < (window.outerWidth / e.firstElementChild.offsetWidth); i++) {
+          e.insertBefore(e.firstElementChild.cloneNode(true), e.firstElementChild);
+        }
+      });
+    });
+  }
+</script>
+{% schema %}
+{
+  "name": "Word band",
+  "tag": "section",
+  "class": "word-band",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Word band"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Word"
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Direction",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "speed",
+          "min": 0,
+          "max": 300,
+          "step": 10,
+          "unit": "%",
+          "label": "Speed",
+          "default": 100
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Word band",
+      "settings": {
+        "title": "Word band"
+      },
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

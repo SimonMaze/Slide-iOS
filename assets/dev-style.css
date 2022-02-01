@@ -1,0 +1,19 @@
+main {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+section {
+  display: block;
+  width: 100vw;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}

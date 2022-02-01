@@ -1,0 +1,11 @@
+<div>
+  <form action="{{ routes.cart_url }}" method="post">
+    {% for item in cart.items %}
+    {% render 'cart-item', item: item %}
+    {% endfor %}
+
+    {{ cart.total_price | money }}
+
+    <input name="checkout" type="submit" value="Checkout">
+  </form>
+</div>

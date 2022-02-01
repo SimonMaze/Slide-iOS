@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>{{ section.settings.title }}</h2>
+
+  <div class="collection">
+  {% for block in section.blocks %}
+    <div class="collection__item">
+      <a href="{{ block.settings.collection.url }}">
+      {{ block.settings.collection.title }}
+      </a>
+    </div>
+  {% endfor %}
+  <div class="collection__item-all">
+    <a href="{{ routes.collections_url }}">SHOW_ALL_LABEL</a>
+  </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "class": "collections-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections list",
+      "settings": {
+        "title": "Collections list"
+      },
+      "blocks": [
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

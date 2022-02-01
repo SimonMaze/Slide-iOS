@@ -1,0 +1,16 @@
+.breadcrumbs__list {
+  padding: 0;
+}
+
+.breadcrumbs__item {
+  display: inline-block;
+} 
+
+.breadcrumbs__item::after {
+  content: "/";
+  padding: 0 .2rem;
+} 
+
+.breadcrumbs__item:last-child::after {
+  content: "";
+} 

@@ -1,0 +1,11 @@
+.faq-list-item__question {
+  cursor: pointer;
+}
+
+.faq-list-item__answer {
+  display: none;
+}
+
+.faq-list-item__question.active + .faq-list-item__answer {
+  display: block;
+}

@@ -1,0 +1,49 @@
+<div class="container">
+
+  {% if section.settings.show_filters %}
+  {% render 'collection-filters' %}
+  {% endif %}
+
+  {%- liquid
+  paginate collection.products by section.settings.paginate_by
+  for item in collection.products
+  render 'product-grid-item', product: item, collection: collection, hover: section.settings.hover
+  endfor
+  if paginate.pages > 1
+  assign anchor = 'shopify-section-' | append: section.id
+  render 'pagination', paginate: paginate, anchor: anchor
+  endif
+  endpaginate
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "class": "collection",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "show_filters",
+      "type": "checkbox",
+      "label": "Show collection filters",
+      "default": true
+    },
+    {
+      "id": "paginate_by",
+      "type": "range",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "label": "Number of results per page",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "hover",
+      "label": "Show second image on hover",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

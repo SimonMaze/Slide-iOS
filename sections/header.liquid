@@ -1,0 +1,35 @@
+<div class="container">
+  {% render 'nav-main' %}
+
+  <a href="{{ routes.cart_url }}">cart</a>
+
+  {% if shop.customer_accounts_enabled %}
+    {% if customer %}
+      <a href="{{ routes.account_url }}">account</a>
+      {{ 'log out' | customer_logout_link }}
+    {% else %}
+      {{ 'log in ' | customer_login_link }}
+    {% endif %}
+  {% endif %}
+
+  {% if section.settings.show_language %}
+    {% render 'language-switcher' %}
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header",
+  "tag": "header",
+  "settings": [
+    {
+      "id": "show_language",
+      "type": "checkbox",
+      "label": "Show language switcher",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

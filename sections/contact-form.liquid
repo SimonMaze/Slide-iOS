@@ -1,0 +1,147 @@
+<div class="container">
+  <h2>{{ section.settings.title }}</h2>
+{% form 'contact' %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'email' %}
+        <label for="id="ContactForm-email">{{ block.settings.email_label }}</label>
+        <input
+          autocomplete="email"
+          id="ContactForm-email"
+          type="email"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          required
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="ContactForm-email-error"
+          {% endif %}
+        >
+        {% when 'name' %}
+          <label for="id="ContactForm-name">{{ block.settings.name_label }}</label>
+          <input autocomplete="name" id="ContactForm-name" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" {% if block.settings.required %}required{% endif %}>
+        {% when 'phone' %}
+          <label for="id="ContactForm-phone">{{ block.settings.phone_label }}</label>
+          <input type="tel" id="ContactForm-phone" autocomplete="tel" name="contact[phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" {% if block.settings.required %}required{% endif %}>
+        {% when 'subject' %}
+          <label for="id="ContactForm-subject">{{ block.settings.subject_label }}</label>
+          <input type="text" id="ContactForm-subject" name="contact[subject]" {% if block.settings.required %}required{% endif %}>
+        {% when 'text' %}
+          <label for="id="ContactForm-content">{{ block.settings.content_label }}</label>
+          <textarea rows="10" id="ContactForm-content" name="contact[content]" required></textarea>
+    {% endcase %}
+  {% endfor %}
+
+  	<input type="submit" value="SUBMIT_LABEL">
+{% endform %}
+</div>
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "contact-form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Email",
+      "type": "email",
+      "settings": [
+        {
+          "type": "text",
+          "id": "email_label",
+          "label": "Email"
+        }
+      ]
+    },
+    {
+      "name": "Name",
+      "type": "name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name_label",
+          "label": "Name"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "Phone",
+      "type": "phone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "phone_label",
+          "label": "Phone"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "name": "Subject",
+      "type": "subject",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subject_label",
+          "label": "Subject"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "type": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "content_label",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form",
+      "settings": {
+        "title": "Contact form"
+      },
+      "blocks": [
+        {
+          "type": "email"
+        },
+        {
+          "type": "name"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

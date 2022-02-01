@@ -1,0 +1,53 @@
+{{ 'section-blog.css' | asset_url | stylesheet_tag }}
+
+{%- paginate blog.articles by section.settings.nb_article_items -%}
+
+<div class="container">
+    <div class="blog-articles">
+        {%- for article in blog.articles -%}
+            {%- render 'article-grid-item', article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author  -%}
+        {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+        {%- render 'pagination', paginate: paginate, anchor: anchor -%}
+    {%- endif -%}
+</div>
+
+{%- endpaginate -%}
+
+{% schema %}
+{
+    "name": "Blog section",
+    "tag": "section",
+    "class": "section-blog",
+    "settings": [
+        {
+        "type": "range",
+        "id": "nb_article_items",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "label": "Number of articles to display per page",
+        "default": 3
+        },
+        {
+        "type": "checkbox",
+        "id": "show_image",
+        "default": true,
+        "label": "Show featured image"
+        },
+        {
+        "type": "checkbox",
+        "id": "show_date",
+        "default": true,
+        "label": "Show publication date"
+        },
+        {
+        "type": "checkbox",
+        "id": "show_author",
+        "default": false,
+        "label": "Show author info"
+        }
+    ]
+}
+{% endschema %}

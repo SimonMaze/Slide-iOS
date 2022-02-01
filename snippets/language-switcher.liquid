@@ -1,0 +1,23 @@
+{%- capture localeCode -%}/{{ request.locale.iso_code }}
+{%- endcapture -%}
+{% if shop.published_locales.size == 2 %}
+  {% for locale in shop.published_locales %}
+    {% unless locale.iso_code == request.locale.iso_code %}
+      {% if locale.primary %}
+        <a href="{{ shop.url }}{{ request.path | remove_first: localeCode }}">{{ locale.endonym_name }}</a>
+      {% else %}
+        <a href="{{ shop.url }}/{{ locale.iso_code }}{{ request.path | remove_first: localeCode }}">{{ locale.endonym_name }}</a>
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+{% elsif shop.published_locales.size > 2 %}
+  <select name="language-switcher" id="language-switcher-dropdown" value="{{ shop.url }}{{ request.path }}" onchange="location=this.value">
+    {% for locale in shop.published_locales %}
+      {% if locale.primary %}
+        <option value="{{ shop.url }}{{ request.path | remove_first: localeCode }}">{{ locale.endonym_name }}</option>
+      {% else %}
+        <option value="{{ shop.url }}/{{ locale.iso_code }}{{ request.path | remove_first: localeCode }}">{{ locale.endonym_name }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+{% endif %}

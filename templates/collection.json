@@ -1,0 +1,15 @@
+{
+  "name": "Default collection template",
+  "sections": {
+    "main": {
+      "type": "collection-items"
+    },
+    "details": {
+      "type": "collection-details"
+    }
+  },
+  "order": [
+    "details",
+    "main"
+  ]
+}

@@ -1,0 +1,5 @@
+{% for image in product.images %}
+  <div>
+     {{ image.src | image_url: width: 500 | image_tag }}
+  </div>
+{% endfor %}

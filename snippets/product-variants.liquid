@@ -1,0 +1,49 @@
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" async></script>
+
+{% for option in product.options %}
+{% assign optionIndex = forloop.index | plus: 1 %}
+{% assign optionMultiplier = product.options_with_values[optionIndex].values.size | at_least: 1 %}
+{% assign dataMultiplier = product.options_with_values[forloop.index].values.size | times: optionMultiplier | at_least: 1 %}
+<label for="select-option-{{ option | handleize }}">{{ option }}</label>
+<fieldset id="select-option-{{ option }}" name="productOptions" data-multiplier="{{ dataMultiplier }}">
+  {% assign optionIndex = forloop.index0 %}
+  {% for value in product.options_with_values[optionIndex].values %}
+  <input type="radio" {% if product.selected_or_first_available_variant.options[optionIndex] == value %}checked="checked" {% endif %} value="{{ value | escape }}" data-index="option{{ optionIndex }}" name="{{ product.options[optionIndex] | handleize }}" id="ProductSelect-option-{{ product.options[optionIndex] | handleize }}-{{ value | escape }}">
+  <label for="ProductSelect-option-{{ product.options[optionIndex] | handleize }}-{{ value | escape }}">
+    {{ value | escape }}
+  </label>
+  {% endfor %}
+</fieldset>
+{% endfor %}
+
+<script>
+  const optionArray = document.querySelectorAll('[name="productOptions"]');
+  var variantIndex = 0;
+  optionArray.forEach(el => {
+    el.addEventListener('change', function () {
+      variantIndex = 0;
+      optionArray.forEach(option => {
+        const selectedOption = option.querySelector('input:checked');
+        getVariantIndex(selectedOption);
+      });
+      updateVariant();
+    })
+  });
+
+  function updateVariant() {
+    document.getElementById('product-select').selectedIndex = variantIndex;
+    document.getElementById('product-price-label').innerHTML = document.getElementById('product-select').options[variantIndex].getAttribute('data-variant-price');
+    console.log(document.getElementById('product-select').options[variantIndex].disabled);
+    if (document.getElementById('product-select').options[variantIndex].disabled) {
+      document.getElementById('add-to-cart').value = "Sold out";
+      document.getElementById('add-to-cart').disabled = true;
+    } else {
+      document.getElementById('add-to-cart').value = "Add to cart";
+      document.getElementById('add-to-cart').disabled = false;
+    }
+  }
+
+  function getVariantIndex(option) {
+    variantIndex += parseInt(option.parentNode.getAttribute('data-multiplier')) * (Array.from(option.parentNode.children).indexOf(option)) / 2;
+  }
+</script>

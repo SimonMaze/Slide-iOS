@@ -1,0 +1,108 @@
+<div class="container">
+  {% render "product-images" %}
+  {% comment %}{% render "product-form" %}{% endcomment %}
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when '@app' %}
+        {% render block %}
+      {% when 'title' %}
+        <h1>{{ product.title | escape }}</h1>
+      {% when 'price' %}
+        <div id="product-price-label">{{ product.price | money }}</div>
+      {% when 'text' %}
+        <p>{{ block.settings.text }}</p>
+      {% when 'vendor' %}
+        <p>{{ product.vendor | escape }}</p>
+      {% when 'sku' %}
+        <p>{{ product.selected_or_first_available_variant.sku | escape }}</p>
+      {% when 'ratings' %}
+        {% render 'product-ratings' %}
+      {% when 'variant' %}
+        {% render 'product-variants' %}
+      {% when 'buy_buttons' %}
+        {% render 'product-buy-buttons' %}
+      {% when 'share' %}
+        {% render 'product-share' %}
+      {% when 'description' %}
+        <p>{{ product.description }}</p>
+    {% endcase %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Product details",
+  "tag": "section",
+  "class": "product-details",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "name": "Text",
+      "type": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Text block"
+        }
+      ]
+    },
+    {
+      "name": "Title",
+      "type": "title",
+      "limit": 1
+    },
+    {
+      "name": "Price",
+      "type": "price",
+      "limit": 1
+    },
+    {
+      "name": "Vendor",
+      "type": "vendor",
+      "limit": 1
+    },
+    {
+      "name": "SKU",
+      "type": "sku",
+      "limit": 1
+    },
+    {
+      "name": "Ratings",
+      "type": "ratings",
+      "limit": 1
+    },
+    {
+      "name": "Variant picker",
+      "type": "variant",
+      "limit": 1
+    },
+    {
+      "name": "Buy buttons",
+      "type": "buy_buttons",
+      "limit": 1
+    },
+    {
+      "name": "Share",
+      "type": "share",
+      "limit": 1
+    },
+    {
+      "name": "Description",
+      "type": "description",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,7 @@
+.article-grid-item {
+  display: flex;
+}
+
+.article-grid-item__img {
+  width: 50%;
+}

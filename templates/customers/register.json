@@ -1,0 +1,11 @@
+{
+  "name": "Register account",
+  "sections": {
+    "main": {
+      "type": "account-register"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

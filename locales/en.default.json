@@ -1,0 +1,22 @@
+{
+  "general": {
+    "404": {
+      "title": "Not found",
+      "subtext": "Sorry, the page you were looking for does not exist. Maybe try a search?",
+      "continue_shopping": "or continue shopping"
+    },
+    "search": {
+      "placeholder": "Search",
+      "submit": "Go!"
+    },
+    "meta": {
+      "page": "",
+      "tags": ""
+    }
+  },
+  "newsletter": {
+    "label": "TODO",
+    "button_label": "TODO",
+    "success": "TODO"
+  }
+}

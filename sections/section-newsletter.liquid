@@ -1,0 +1,127 @@
+<div class="container">
+  <h2>{{ section.settings.title }}</h2>
+  <h3>{{ section.settings.subtitle }}</h3>
+  <p>{{ section.settings.text }}</p>
+{% form 'customer', class: 'newsletter-form', return_to: request.path %}
+  {% assign customerTags = "" %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'tag' %}
+        {% capture tags %}{{- customerTags -}},{{ block.settings.tag }}{% endcapture %}
+        {% assign customerTags = tags %}
+      {% when 'email' %}
+        <label for="id="NewsletterForm-email">{{ block.settings.email_label }}</label>
+        <input
+          autocomplete="email"
+          id="NewsletterForm-email"
+          type="email"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          required
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="NewsletterForm-email-error"
+          {% endif %}
+        >
+        {% when 'name' %}
+          <label for="id="NewsletterForm-name">{{ block.settings.name_label }}</label>
+          <input autocomplete="name" id="NewsletterForm-name" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" {% if block.settings.required %}required{% endif %}>
+    {% endcase %}
+  {% endfor %}
+
+  <input type="hidden" name="contact[tags]" value="{{ customerTags | remove_first: ',' }}">
+
+	<input type="submit" value="SUBMIT_LABEL">
+  {%- if form.errors -%}
+    <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+  {%- endif -%}
+
+  {%- if form.posted_successfully? -%}
+    <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>SUCESS_LABEL</h3>
+  {%- endif -%}
+{% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub-title"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Email",
+      "type": "email",
+      "settings": [
+        {
+          "type": "text",
+          "id": "email_label",
+          "label": "Email",
+          "default": "Email"
+        }
+      ]
+    },
+    {
+      "name": "Name",
+      "type": "name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name_label",
+          "label": "Name",
+          "default": "Name"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "type": "tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag name",
+          "default": "Newsletter"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "title": "Subscribe to our newsletter"
+      },
+      "blocks": [
+        {
+          "type": "email"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

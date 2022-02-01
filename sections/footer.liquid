@@ -1,0 +1,20 @@
+<div class="container">
+<p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</p>
+{% render 'credit' %}
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer",
+  "tag": "footer",
+  "settings": [
+    {
+      "id": "show_language",
+      "type": "checkbox",
+      "label": "Show language switcher",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+<div class="container">
+  {% if section.settings.show_header %}
+    <h2>{{ section.settings.header }}</h2>
+  {% endif %}
+
+  {% for article in section.settings.featured_blog.articles limit: 4 %}
+    {{ article.title }}
+    {% render 'article-grid-item', article: article %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Featured blog",
+  "class": "featured-blog",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Our featured blog"
+    },
+    {
+      "id": "show_header",
+      "type": "checkbox",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "blog",
+      "id": "featured_blog",
+      "label": "Featured blog"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Featured blog",
+      "settings": {
+        "header": "Featured blog",
+        "show_header": true
+      }
+    }
+  ]
+}
+{% endschema %}

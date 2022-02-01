@@ -1,0 +1,94 @@
+ <div class="container">
+  <div>
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input type="text" placeholder="Search" name="q" value="{{ search.terms | escape }}">
+      <input type="submit" value="Search">
+    </form>
+  </div>
+
+  {% if search.performed %}
+    <p>
+      {% if search.results_count == 0 %}
+        Sorry, we could not find anything matching your search.
+      {% else %}
+        {{ search.results_count }} result(s) for {{ search.terms }}
+      {% endif %}
+    </p>
+  {% endif %}
+
+  {% if search.performed and search.results.size > 0 %}
+    {% paginate search.results by section.settings.nb_search_items %}
+
+      {% for item in search.results %}
+        {% case item.object_type %}
+          {% when 'product' %}
+            {% render 'product-grid-item', product: item %}
+          {% when 'article' %}
+            {% render 'article-grid-item', article: item, show_image: section.settings.show_article_image, show_date:
+            section.settings.show_article_date, show_author: section.settings.show_article_author %}
+          {% when 'page' %}
+            <h2>{{ item.title | truncate: 50 | escape }}</h2>
+            <a href="{{ item.url }}">Read more</a>
+        {% endcase %}
+
+      {% endfor %}
+
+    {% endpaginate %}
+
+    {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+    {% endif %}
+  {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Search section",
+  "tag": "section",
+  "class": "section-search",
+  "settings": [
+    {
+    "type": "range",
+    "id": "nb_search_items",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "label": "Number of results to display per page",
+    "default": 24
+    },
+    {
+    "type": "header",
+    "content": "Product result options"
+    },
+    {
+    "type": "header",
+    "content": "Blog post result options"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_article_image",
+    "default": true,
+    "label": "Show article featured image"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_article_date",
+    "default": true,
+    "label": "Show article publication date"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_article_author",
+    "default": false,
+    "label": "Show article author info"
+    },
+    {
+    "type": "header",
+    "content": "Page result options"
+    }
+  ]
+}
+
+{% endschema %}

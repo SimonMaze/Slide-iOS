@@ -1,0 +1,11 @@
+{
+  "name": "Cart template",
+  "sections": {
+    "main": {
+      "type": "cart-form"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

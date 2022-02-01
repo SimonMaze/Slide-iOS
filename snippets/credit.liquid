@@ -1,0 +1,74 @@
+<div class="wordmark-wrapper">
+  <a href="https://mazedesign.studio"><h1 class="wordmark"><div class="credit">crédits :</div><div class="studio-container"><span class="studio">studio</span></div><div class="m">m</div><div class="right">aze design</div><div class="dot">.</div></h1></a>
+</div>
+{% style %}
+@import url("https://use.typekit.net/iua5xya.css");
+
+.wordmark-wrapper {
+  width: fit-content;
+  position: relative;
+}
+
+.wordmark {
+  font-family: lato, arial;
+  font-weight: 900;
+  font-size: 1.25em;
+  line-height: 1.25em;
+  letter-spacing: -1px;
+  text-align: left;
+  margin: 0px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.wordmark>div {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+}
+
+.wordmark>.studio-container, .wordmark>.right {
+  max-width: 0px;
+  transition: max-width 300ms ease-in;
+}
+
+@media screen and (min-width: 768px) {
+
+.wordmark:hover>.studio-container, .wordmark:hover>.right {
+  width: auto;
+  max-width: 5em;
+}
+}
+
+.wordmark>.credit {
+  opacity: 100%;
+  transition: opacity 250ms;
+}
+
+.wordmark:hover>.credit {
+  opacity: 0;
+}
+
+.studio-container {
+  width: auto;
+  overflow: hidden;
+}
+
+.studio {
+  font-weight: 300;
+  margin-right: 3px;
+}
+
+.right {
+  width: auto;
+  overflow: hidden;
+}
+
+.credit {
+  overflow: hidden;
+  font-size: 0.75em;
+  font-weight: normal;
+  margin-right: 3px;
+}
+
+{% endstyle %}

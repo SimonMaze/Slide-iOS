@@ -1,0 +1,20 @@
+<div class="container align-center">
+  <h1 class="page-404__title">
+    {{ 'general.404.title' | t }}
+  </h1>
+  <p class="page-404__description">
+    {{ 'general.404.subtext' | t }}
+  </p>
+  <div class="page-404__form">
+    <form class="search-form" action="/search" method="GET" role="search">
+      <input type="hidden" name="type" value="product" />
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}"
+        autofocus />
+      <input type="submit" value="{{ 'general.search.submit' | t }}">
+    </form>
+  </div>
+  
+  <a href="{{ routes.all_products_collection_url }}" >
+    {{ 'general.404.continue_shopping' | t }}
+  </a>
+</div>

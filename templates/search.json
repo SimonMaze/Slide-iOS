@@ -1,0 +1,11 @@
+{
+  "name": "Search page template",
+  "sections": {
+    "main": {
+      "type": "search"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

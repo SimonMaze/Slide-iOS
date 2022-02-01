@@ -1,0 +1,27 @@
+<style>
+  {% if hover and product.images.size > 1 %}
+.grid-item__image-wrapper-{{ product.id }} img:last-child {
+  display: none;
+}
+.grid-item__image-wrapper-{{ product.id }}:hover img:last-child {
+  display: block;
+}
+.grid-item__image-wrapper-{{ product.id }}:hover img:first-child {
+  display: none;
+}
+{% endif %}
+</style>
+
+<div class="product_grid_item">
+  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  {{ product.price | money }}
+  {% unless product.available %}
+    <br><strong>sold out</strong>
+  {% endunless %}
+  <a class="grid-item__image-wrapper-{{ product.id }}" href="{{ product.url | within: collection }}">
+    {{ product.featured_image | image_url: width: 500, format: 'pjpg' | image_tag: width: 200, height: 200 }}
+    {% if hover and product.images.size > 1 %}
+      {{ product.images[1] | image_url: width: 500, format: 'pjpg' | image_tag: width: 200, height: 200 }}
+    {% endif %}
+  </a>
+</div>

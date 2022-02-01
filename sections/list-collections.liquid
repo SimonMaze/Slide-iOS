@@ -1,0 +1,81 @@
+{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+<div class="container">
+  <h1>{{ section.settings.title | escape }}</h1>
+
+  {%- liquid 
+    if section.settings.sort == 'date' or section.settings.sort == 'date_reverse'
+      assign collections = collections | sort: 'published_at'
+    endif
+
+    if section.settings.sort == 'date_reverse' or section.settings.sort == 'alphabetical_reversed'
+      assign collections = collections | reverse
+    endif
+  -%}
+
+  <div>
+    {% for collection in collections %}
+      {%- render 'collection-grid-item', collection: collection -%} 
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "list-collections",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Collection list title",
+      "default": "Collections"
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+      {
+      "value": "alphabetical",
+      "label": "Alphabetical"
+      },
+      {
+      "value": "alphabetical_reversed",
+      "label": "Alphabetical Reversed"
+      },
+      {
+      "value": "date_reversed",
+      "label": "Date reversed"
+      },
+      {
+      "value": "date",
+      "label": "Date"
+      }
+      ],
+      "default": "alphabetical",
+      "label": "t:sections.main-list-collections.settings.sort.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio",
+      "info": "t:sections.main-list-collections.settings.image_ratio.info"
+    }
+  ]
+}
+{% endschema %}

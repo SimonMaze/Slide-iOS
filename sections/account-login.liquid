@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="customer-login">
+    {% form 'customer_login' %}
+    {% if form.errors %}
+      {{ form.errors | default_errors }}
+    {% endif %}
+
+    <div class="email">
+      <label for="email">Email</label>
+      <input type="email" name="customer[email]">
+    </div>
+
+    <div class="password">
+      <label for="password">Password</label>
+      <input type="password" name="customer[password]">
+      <a href="">LABEL_FORGOT_PASSWORD_LINK</a>
+    </div>
+
+    <div class="submit">
+      <input type="submit" value="Sign in">
+    </div>
+    {% endform %}
+
+    <div class="customer-create">
+      <a href="{{ routes.account_register_url }}">LABEL_CREATE_ACCOUNT_LINK</a>
+    </div>
+  </div>
+
+  <div class="password-recover">
+    {% form 'recover_customer_password' %}
+    {% if form.errors %}
+      {{ form.errors | default_errors }}
+    {% endif %}
+
+    <div class="email">
+      <label for="email">Email</label>
+      <input type="email" name="email">
+    </div>
+
+    <div class="submit">
+      <input type="submit" value="Submit">
+      <a href="">LABEL_CANCEL</a>
+    </div>
+    {% endform %}
+  </div>
+</div>

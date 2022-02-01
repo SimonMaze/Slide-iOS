@@ -1,0 +1,102 @@
+<style>
+#shopify-section-{{ section.id }} {
+  background: {{ section.settings.background }};
+}
+
+.featured-product-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.featured-product__image {
+  grid-column-start: {{ section.settings.alignment }};
+  grid-row-start: 1;
+}
+
+.featured-product__text {
+  grid-row-start: 1;
+}
+</style>
+
+<div class="container">
+  {% if section.settings.show_header %}
+    <h2>{{ section.settings.header }}</h2>
+  {% endif %}
+
+  <div class="featured-product-container">
+    <div class="featured-product__image">
+    {{ section.settings.featured_product.featured_image | image_url: width: 500 | image_tag }}
+    </div>
+    <div class="featured-product__details">
+      <h2>{{ section.settings.featured_product.title }}</h2>
+      <h3>{{ section.settings.featured_product.price | money }}</h3>
+      <p>{{ section.settings.featured_product.description }}</p>
+      <a href="{{ section.settings.featured_product.url }}">
+      {{ section.settings.button_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "featured-product",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Featured product"
+    },
+    {
+      "id": "show_header",
+      "type": "checkbox",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured product"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "1",
+          "label": "Left"
+        },
+        {
+          "value": "2",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "category": "product",
+      "name": "Featured product",
+      "settings": {
+        "header": "Featured product",
+        "show_header": true
+      }
+    }
+  ]
+}
+{% endschema %}

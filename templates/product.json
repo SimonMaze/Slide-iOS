@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "c2ae944d-0eeb-4a57-b641-27f6bf0400f2": {
+          "type": "variant",
+          "settings": {
+          }
+        },
+        "4d050d3b-6159-4549-9265-a4d9b5d75a86": {
+          "type": "buy_buttons",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "c2ae944d-0eeb-4a57-b641-27f6bf0400f2",
+        "4d050d3b-6159-4549-9265-a4d9b5d75a86"
+      ],
+      "settings": {
+        "title": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

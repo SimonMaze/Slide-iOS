@@ -1,0 +1,210 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Labyrinth",
+    "theme_version": "0.1.0",
+    "theme_author": "Studio Maze Design",
+    "theme_documentation_url": "https://github.com/StudioMazeDesign/Labyrinth",
+    "theme_support_url": "https://github.com/StudioMazeDesign/Labyrinth/issues"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "type_base_size",
+        "label": "Base size",
+        "default": "16px",
+        "options": [
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "17px",
+            "label": "17px"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color",
+        "default": "#000",
+        "info": "Used for text links, and primary buttons"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Text color",
+        "default": "#000",
+        "info": "Color used for content and paragraph text"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn link"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "Tiktok link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Google Analytics",
+    "settings": [
+      {
+        "type": "text",
+        "id": "ga_measurement_id",
+        "label": "G- ID for the GA4 property",
+        "info": "https://support.google.com/analytics/answer/6132368"
+      }
+    ]
+  },
+  {
+    "name": "Facebook",
+    "settings": [
+      {
+        "type": "text",
+        "id": "facebook_pixel_id",
+        "label": "FB Pixel ID",
+        "info": "https://business.facebook.com/events_manager"
+      },
+      {
+        "type": "text",
+        "id": "facebook_page_id",
+        "label": "FB Page ID",
+        "info": "https://www.facebook.com/help/1503421039731588"
+      }
+    ]
+  },
+  {
+    "name": "Hotjar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hotjar_site_id",
+        "label": "Site ID",
+        "info": "https://insights.hotjar.com/site/list"
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{% comment %}
+{%- render 'article-grid-item', article: article, show_image: section.settings.show_image, show_date:
+section.settings.show_date, show_author: section.settings.show_author -%}
+{% endcomment %}
+<div class="article-grid-item">
+  {% if show_image == true %}
+    <div class="article-grid-item__img">
+      <img src="{{ article.image.src | image_url }}" alt="{{ article.image.alt }}">
+    </div>
+  {% endif %}
+  <div>
+    <h2>{{ article.title }}</h2>
+    {% if show_date != blank or show_author != blank %}
+    <p>{% if show_date != blank %}{{ article.published_at | date: "%d %b %Y" }} {% endif %} <span>By {% if show_author != blank %}{{ article.author }}{% endif %}</span></p>
+    {% endif %}
+    <p>
+      {%- if article.excerpt.size > 0 -%}
+        {{ article.excerpt | strip_html | truncatewords: 30 }}
+      {%- else -%}
+        {{ article.content | strip_html | truncatewords: 30 }}
+      {%- endif -%}
+    </p>
+    <a href="{{ article.url }}">Read more</a>
+  </div>
+</div>

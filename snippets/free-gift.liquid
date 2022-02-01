@@ -1,0 +1,38 @@
+<script>
+
+  window.onload = function () {
+    let cartContainsFreeProduct = false;
+    let cartContainsQualifyingProduct = false;
+
+    var qualifyingCollection = [];
+    const freeProductVariant = {{ all_products[settings.gift_product].first_available_variant | json
+  }};
+
+  {% assign collection = collections[settings.promo_collection] %}
+
+  {% for product in collection.products %}
+  qualifyingCollection.push({{ product | json }});
+  {% endfor %}
+
+  {% for item in cart.items %}
+  console.log({{ item | json }});
+  if ({{ item.id }} === freeProductVariant.id) {
+    cartContainsFreeProduct = true;
+  }
+  if (qualifyingCollection.some(e => e.id === {{ item.product.id }})) {
+    cartContainsQualifyingProduct = true;
+  }
+  {% endfor %}
+
+  //  If cart contains qualifying product and doesn't already contain free product, add qty 1 of free product
+  if (cartContainsQualifyingProduct && cartContainsFreeProduct === false) {
+
+    // REMOVE JQUERY > REPLACE WITH JS FETCH API https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+
+    jQuery.post('/cart/add.json', { quantity: 1, id: freeProductVariant.id })
+      .done(function () { window.location.reload() })
+
+  } 
+  }
+
+</script>

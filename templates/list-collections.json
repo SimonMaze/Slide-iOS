@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "list-collections",
+      "settings": {
+        "image_ratio": "square"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

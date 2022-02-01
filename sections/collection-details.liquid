@@ -1,0 +1,39 @@
+<div class="container">
+  {% if section.settings.show_collection_image == true and collection.image != blank %}
+    <div class="collection-image"></div>
+      <img src="{{ collection.image }}" alt="{{ collection.title | escape }}">
+    </div>
+  {% endif %}
+  <h1 class="collection-title">{{ collection.title }}</h1>
+
+  {% if section.settings.show_collection_description == true %}
+    <p>{{ collection.description }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Collection details",
+  "tag": "section",
+  "class": "collection-details",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": false,
+      "label": "Show collection description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "Show collection image"
+    }
+  ]
+}
+{% endschema %}

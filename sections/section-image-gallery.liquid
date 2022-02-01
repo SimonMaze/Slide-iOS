@@ -1,0 +1,72 @@
+<div class="container">
+  <h2>{{ section.settings.title }}</h2>
+
+  <div class="gallery">
+    {% for block in section.blocks %}
+      <div class="gallery__image">
+        {% unless block.settings.link == blank %}
+        <a href="{{ block.settings.link }}">
+        {{ block.settings.image | image_url: width: 500 | image_tag }}
+        </a>
+        {% else %}
+        {{ block.settings.image | image_url: width: 500 | image_tag }}
+        {% endunless %}
+        {{ block.settings.text }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image gallery",
+  "tag": "section",
+  "class": "image-gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Gallery title"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "image",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image gallery",
+      "settings": {
+        "title": "Gallery"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

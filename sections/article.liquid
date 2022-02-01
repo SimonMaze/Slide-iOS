@@ -1,0 +1,158 @@
+{{ 'section-article.css' | asset_url | stylesheet_tag }}
+<div class="container">
+    <article>
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'featured_image' %}
+                    {% if article.image %}
+                        <div>
+                            <img src="{{ article.image.src | image_url }}" alt="{{ article.image.alt }}">
+                        </div>
+                    {% endif %}
+
+                {% when 'title' %}
+                    <div class="article-header">
+                        <h1>{{ article.title | escape }}</h1>
+                        {% if block.settings.show_date != blank or block.settings.show_author != blank %}
+                            <p>
+                                {% if block.settings.show_date != blank %}
+                                    {{ article.published_at | date: "%d %b %Y" }}
+                                {% endif %}
+                                {% if block.settings.show_author != blank %}
+                                    By <span>{{ article.author }}</span>
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                {% when 'content' %}
+                    <div>
+                        {{ article.content }}
+                    </div>
+
+                {% when 'social_share' %}
+                    <div>
+                        {% render 'social-share', share_title: article.title, share_link: article.url, share_img:arcticle.image %}
+                    </div>
+
+            {% endcase %}
+        {% endfor %}
+
+        {%- if blog.comments_enabled? -%}
+            {%- if article.comments_count > 0 -%}
+                <h2>{{ article.comments_count }} comment(s)</h2>
+                <ul>
+                    {% paginate article.comments by 5 %}
+                        <!-- If a comment was just submitted with no blank field, show it. -->
+                        {%- if comment.status == 'pending' and comment.content -%}
+                        <li>
+                            {{ comment.content }}
+                            <span>{{ comment.author }}</span>
+                            <span>{{ comment.created_at }}</span>
+                        </li>
+                        {%- endif -%}
+                    
+                        {% for comment in article.comments %}
+                        <li>
+                            {{ comment.content }}
+                            <span>{{ comment.author }}</span>
+                            <span>{{ comment.created_at }}</span>
+                        </li>
+                        {% endfor %}
+
+                    {% endpaginate %}
+                </ul>
+
+            {%- endif -%}
+
+            {% form 'new_comment', article %}
+                {%- liquid
+                    assign post_message = 'blogs.article.success'
+                    if blog.moderated? and comment.status == 'unapproved'
+                        assign post_message = 'blogs.article.success_moderated'
+                    endif
+                -%}
+                <h2>Comment form</h2>
+                {%- if form.errors -%}
+                    <p>Error form message</p>
+    
+                {%- elsif form.posted_successfully? -%}
+                    <p>Form post success message</p>
+                {%- endif -%}
+                
+                <label for="CommentForm-author">Author name <span>*</span></label>
+                {%- if form.errors contains 'author' -%}
+                    <p>Message d'erreur</p>
+                {%- endif -%}
+                <input type="text" name="comment[author]" id="CommentForm-author" autocomplete="name" value="{{ form.author }}" aria-required="true" {% if form.errors contains 'author' %} {% comment %} mettre la classe erreur {% endcomment %} {% endif %}>
+                
+            
+                <label for="CommentForm-email">Email <span>*</span></label>
+                {%- if form.errors contains 'email' -%}
+                    <p>Message d'erreur</p>
+                {%- endif -%}
+                <input type="email" name="comment[email]" id="CommentForm-email" autocomplete="email" value="{{ form.email }}" autocorrect="off" autocapitalize="off" aria-required="true" {% if form.errors contains 'email' %} {% comment %}  mettre la classe erreur {% endcomment %} {% endif %}">
+                
+
+                <label for="CommentForm-body">Comment <span>*</span></label>
+                {%- if form.errors contains 'body' -%}
+                    <p>Message d'erreur</p>
+                {%- endif -%}
+                <textarea rows="5" name="comment[body]" id="CommentForm-body" aria-required="true" {% if form.errors contains 'body' %} {% comment %} mettre la classe erreur {% endcomment %}  {% endif %}>{{ form.body }}</textarea>
+
+
+                {%- if blog.moderated? -%}
+                    <p class="article-template__comment-warning caption">Approval by moderator to be published</p>
+                {%- endif -%}
+                <input type="submit" value="Submit comment">
+            {% endform %}
+
+        {%- endif -%}
+
+    </article>
+</div>
+
+
+
+{% schema %}
+{
+    "name": "Article section",
+    "tag": "section",
+    "blocks": [
+    {
+        "type": "featured_image",
+        "name": "Featured image",
+        "limit": 1
+    },
+    {
+        "type": "title",
+        "name": "Title section",
+        "limit": 1,
+        "settings": [
+            {
+            "type": "checkbox",
+            "id": "show_date",
+            "default": true,
+            "label": "Show date"
+            },
+            {
+            "type": "checkbox",
+            "id": "show_author",
+            "default": false,
+            "label": "Show author"
+            }
+        ]
+    },
+    {
+        "type": "content",
+        "name": "Content",
+        "limit": 1
+    },
+    {
+        "type": "social_share",
+        "name": "Social share",
+        "limit": 1
+    }
+    ]
+}
+{% endschema %}

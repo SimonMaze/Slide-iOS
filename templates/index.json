@@ -1,0 +1,117 @@
+{
+  "sections": {
+    "main": {
+      "type": "section-hero",
+      "settings": {
+        "horizontal_alignment": "center",
+        "text_alignment": "center",
+        "page_hero_title": "Labyrinth",
+        "page_hero_subtitle": "subtitle",
+        "page_hero_link_text": "",
+        "page_hero_link": ""
+      }
+    },
+    "16337076314c5f2d3c": {
+      "type": "section-featured-collection",
+      "settings": {
+        "header": "Featured collection",
+        "show_header": true,
+        "featured_collection": "testing-collection"
+      }
+    },
+    "1638368316c3049efc": {
+      "type": "section-text-columns",
+      "blocks": {
+        "16383683161097817a-0": {
+          "type": "column",
+          "settings": {
+            "title": "Column 1",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum tellus quis pellentesque elementum. Suspendisse pretium lorem et metus facilisis pretium. Proin nec tincidunt.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        },
+        "16383683161097817a-1": {
+          "type": "column",
+          "settings": {
+            "title": "Column 2",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida rhoncus mauris vitae eleifend. Donec turpis ante, interdum sit amet accumsan a, dictum eget.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        },
+        "16383683161097817a-2": {
+          "type": "column",
+          "settings": {
+            "title": "Column 3",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nibh mauris, gravida congue leo eu, congue finibus augue. Vestibulum aliquam volutpat ligula, nec tristique.",
+            "link_label": "Learn more",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "16383683161097817a-0",
+        "16383683161097817a-1",
+        "16383683161097817a-2"
+      ],
+      "settings": {
+        "title": "Section title",
+        "link_label": "",
+        "link_url": ""
+      }
+    },
+    "16426197649a35de69": {
+      "type": "section-svg-list",
+      "blocks": {
+        "1642619764463b1b35-0": {
+          "type": "icon",
+          "settings": {
+            "text": "Sans agent de conservation",
+            "icon": "no-preservatives",
+            "word_split": 2
+          }
+        },
+        "1642619764463b1b35-1": {
+          "type": "icon",
+          "settings": {
+            "text": "Faible en sodium",
+            "icon": "low-sodium",
+            "word_split": 0
+          }
+        },
+        "ae03f1e1-2969-4616-9cbe-e43c2acc6e4c": {
+          "type": "icon",
+          "settings": {
+            "text": "Faible en gras",
+            "icon": "low-fat",
+            "word_split": 0
+          }
+        },
+        "05f0a62c-c5cc-4cc4-abef-ca105fc04dbf": {
+          "type": "icon",
+          "settings": {
+            "text": "sans sucre ajouté",
+            "icon": "no-sugar",
+            "word_split": 0
+          }
+        }
+      },
+      "block_order": [
+        "1642619764463b1b35-0",
+        "1642619764463b1b35-1",
+        "ae03f1e1-2969-4616-9cbe-e43c2acc6e4c",
+        "05f0a62c-c5cc-4cc4-abef-ca105fc04dbf"
+      ],
+      "settings": {
+        "title": "List title"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16337076314c5f2d3c",
+    "1638368316c3049efc",
+    "16426197649a35de69"
+  ]
+}

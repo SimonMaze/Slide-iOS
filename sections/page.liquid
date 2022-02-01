@@ -1,0 +1,46 @@
+{%- liquid
+    assign content_container = "container"
+    if section.settings.container_width == "narrow"
+        assign content_container = "container-narrow"  
+    endif
+-%}
+<div class="{{ content_container }}">
+    {% if section.settings.show_breadcrumb == true %}
+        {% render 'breadcrumb' %}
+    {% endif %}
+    {{ page.content }}
+</div>
+
+
+{% schema %}
+    {
+    "name": "Page",
+    "tag": "section",
+    "class": "page-content",
+    "settings": [
+        {
+        "type": "select",
+        "id": "container_width",
+        "label": "Container width",
+        "options": [
+            {
+            "value": "default",
+            "label": "Default"
+            },
+            {
+            "value": "narrow",
+            "label": "Narrow"
+            }
+        ],
+        "default": "default"
+        },
+        {
+        "type": "checkbox",
+        "id": "show_breadcrumb",
+        "label": "Show breadcrumb",
+        "default": false
+        }
+    ]
+    }
+
+{% endschema %}

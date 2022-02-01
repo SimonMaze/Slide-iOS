@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="{{ 'section-image-text.css' | asset_url }}">
+
+<style>
+#shopify-section-{{ section.id }} {
+  background: {{ section.settings.background }};
+}
+
+.image-text-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.image-text__image {
+  grid-column-start: {{ section.settings.alignment }};
+  grid-row-start: 1;
+}
+
+.image-text__text {
+  grid-row-start: 1;
+}
+</style>
+
+<div class="container">
+  <div class="image-text-container">
+    <div class="image-text__image">
+    {{ section.settings.image | image_url: width: 500 | image_tag }}
+    </div>
+    <div class="image-text__text">
+      <h2>{{ section.settings.title }}</h2>
+      <h3>{{ section.settings.subtitle }}</h3>
+      <p>{{ section.settings.text }}</p>
+      <a href="{{ section.settings.link }}">
+      {{ section.settings.button_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image and text",
+  "tag": "section",
+  "class": "image-text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "1",
+          "label": "Left"
+        },
+        {
+          "value": "2",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub-title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image and text",
+      "settings": {
+        "title": "Section title"
+      }
+    }
+  ]
+}
+{% endschema %}

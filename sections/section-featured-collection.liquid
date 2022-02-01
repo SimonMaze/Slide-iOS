@@ -1,0 +1,46 @@
+<div class="container">
+  {% if section.settings.show_header %}
+    <h2>{{ section.settings.header }}</h2>
+  {% endif %}
+
+  {% for product in collections[section.settings.featured_collection].products limit: 4 %}
+    {% render 'product-grid-item', product: product %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "featured-collection",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Our featured collection"
+    },
+    {
+      "id": "show_header",
+      "type": "checkbox",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collections",
+      "name": "Featured collection",
+      "settings": {
+        "header": "Featured collection",
+        "show_header": true
+      }
+    }
+  ]
+}
+{% endschema %}

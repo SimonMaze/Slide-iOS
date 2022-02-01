@@ -1,0 +1,32 @@
+<div class="container">
+<form action="{{ routes.cart_url }}" method="post">
+  <div class="cart__line-items">
+    {% for item in cart.items %}
+    {% render 'cart-item', item: item %}
+    {% endfor %}
+  </div>
+
+  {% render 'cart-details' %}
+
+  <input name="checkout" type="submit" value="CHECKOUT_LABEL">
+</form>
+</div>
+{% schema %}
+{
+  "name": "Cart form",
+  "tag": "section",
+  "class": "cart-form",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_shipping",
+      "label": "Show shipping calculator"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_notes",
+      "label": "Allow cart notes"
+    }
+  ]
+}
+{% endschema %}

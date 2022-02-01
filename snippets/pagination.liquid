@@ -1,0 +1,73 @@
+{% comment %}
+Renders a set of links for paginated results. Must be used within paginate tags.
+Usage:
+{% paginate results by 2 %}
+{% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+{% endpaginate %}
+Accepts:
+- paginate: {Object}
+- anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'component-pagination.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-pagination.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if paginate.parts.size > 0 -%}
+<div class="pagination-wrapper">
+  <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+    <ul class="pagination__list list-unstyled" role="list">
+      {%- if paginate.previous -%}
+      <li>
+        <p onclick="updatePage('{{ paginate.current_page | minus: 1 }}')">
+          < </p>
+      </li>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+      <li>
+        {%- if part.is_link -%}
+        <p onclick="updatePage('{{ forloop.index }}')">{{ part.title }}</p>
+        {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+        <span class="pagination__item pagination__item--current" aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+        {%- else -%}
+        <span class="pagination__item">{{ part.title }}</span>
+        {%- endif -%}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+
+      {%- if paginate.next -%}
+      <li>
+        <p onclick="updatePage('{{ paginate.current_page | plus: 1 }}')">></p>
+      </li>
+      {%- endif -%}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  function updatePage(page) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set("page", page);
+    const sectionURL = '?' + urlParams.toString() + '&sections={{ section.id }}';
+    request = new XMLHttpRequest();
+    request.open('GET', sectionURL, true);
+    request.onload = function () {
+      if (request.readyState === request.DONE) {
+        if (request.status === 200) {
+          const section = JSON.parse(request.responseText);
+          var currentSection = document.getElementById('shopify-section-{{ section.id }}');
+          currentSection.outerHTML = section['{{ section.id }}'];
+          window.history.pushState({}, '', '?' + urlParams.toString());
+          console.log(currentSection.firstChild);
+          document.getElementById('shopify-section-{{ section.id }}').scrollIntoView();
+        }
+      }
+    };
+    request.send();
+  }
+</script>
+
+{%- endif -%}

@@ -1,0 +1,24 @@
+<div class="cart__details">
+  {% if section.settings.show_notes %}
+  <label>NOTES_LABEL:</label>
+  <textarea name="note"></textarea>
+  {% endif %}
+
+  {% if cart.total_discount >= 1 %}
+  {{ cart.original_total_price | money }}
+
+  {% for discount_application in cart.discount_applications %}
+  DISCOUNT_NAME_LABEL:
+  {{ discount_application.title }}
+  SAVINGS_LABEL: -{{ discount_application.total_allocated_amount | money }}
+  {% endfor %}
+
+  {% endif %}
+
+  {% if section.settings.show_shipping %}
+  {% render 'cart-shipping' %}
+  {% endif %}
+
+  <p>SUB_TOTAL_LABEL : {{ cart.total_price | money }}</p>
+  <p>TAXES_AND_SHIPPING_CALCULATED_AT_CHECKOUT</p>
+</div>

@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="{{ 'faq-list.css' | asset_url }}">
+
+<div class=container>
+
+  <div class="faq-list__items">
+    {% for block in section.blocks %}
+      <div class="faq-list-item">
+        <div class="faq-list-item__question">
+          {{ block.settings.question }}
+          + {% comment %}Change for snippet with svg asset{% endcomment %}
+        </div>
+        <div class="faq-list-item__answer">
+          {{ block.settings.answer }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% javascript %}
+const faqQuestions = document.querySelectorAll('.faq-list-item__question');
+faqQuestions.forEach(e => {
+  e.addEventListener("click", function() {
+    for (ele of faqQuestions) {
+      if (ele == e) {
+        e.classList.toggle("active");
+      } else {
+        ele.classList.remove("active");
+      }
+    }
+  })
+});
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "FAQ List",
+  "tag": "section",
+  "class": "faq-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "sub-title",
+      "label": "Sub-title"
+    },
+    {
+      "type": "textarea",
+      "id": "details",
+      "label": "Details"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Question",
+      "type": "question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ List",
+      "settings": {
+        "title": "FAQ"
+      },
+      "blocks": [
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,36 @@
+{% comment %}
+{% render 'social-share', share_title: article.title, share_link: article.url, share_img:arcticle.image %} 
+{% endcomment %}
+
+<ul>
+  {% if settings.share_facebook %}
+    <li>
+      <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
+        facebook
+        <span aria-hidden="true">Share</span>
+        <span class="visually-hidden">Share on Facebook</span>
+      </a>
+    </li>
+  {% endif %}
+  {% if settings.share_twitter %}
+    <li>
+      <a target="_blank"
+        href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
+        twitter
+        <span aria-hidden="true">Tweet</span>
+        <span class="visually-hidden">Tweet on Twitter</span>
+      </a>
+    </li>
+  {% endif %}
+  {% if settings.share_pinterest %}
+    <li>
+      <a target="_blank"
+        href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+        pinterest
+        <span aria-hidden="true">Pin it</span>
+        <span class="visually-hidden">Pin on Pinterest</span>
+      </a>
+    </li>
+  {% endif %}
+  
+</ul>

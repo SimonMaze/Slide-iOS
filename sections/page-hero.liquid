@@ -1,0 +1,100 @@
+{{ 'page-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+    assign bg_img_url = 'placeholder-hero.jpg' | asset_url
+    if section.settings.page_hero_img != blank 
+        assign bg_img_url = section.settings.page_hero_img | img_url
+    endif
+-%}
+
+<div class="page-hero__container justify-{{ section.settings.horizontal_alignment }}" style="background-image: url({{ bg_img_url }});">
+  <div class="container">
+    <div class="page-hero__content-wrapper align-{{ section.settings.text_alignment }}">
+        {% if section.settings.page_hero_title != blank %}
+            <h1 class="page-hero__title">{{ section.settings.page_hero_title }}</h1>
+        {% endif %}
+        {% if section.settings.page_hero_subtitle != blank %}
+            <p class="page-hero__subtitle">{{ section.settings.page_hero_subtitle }}</p>
+        {% endif %}
+        {% if section.settings.page_hero_link_text != blank and section.settings.page_hero_link != blank %}
+            <a href="{{ section.settings.page_hero_link }}" class="btn btn-default">{{ section.settings.page_hero_link_text }}</a>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Page hero",
+"tag": "section",
+"class": "page-hero",
+"settings": [
+  {
+    "type": "image_picker",
+    "id": "page_hero_img",
+    "label": "Hero background image"
+  },
+  {
+    "type": "select",
+    "id": "horizontal_alignment",
+    "label": "Text horizontal alignment in the section",
+    "options": [
+        {
+        "value": "left",
+        "label": "Left"
+        },
+        {
+        "value": "center",
+        "label": "Center"
+        },
+        {
+        "value": "right",
+        "label": "Right"
+        }
+    ],
+    "default": "left"
+  },
+  {
+    "type": "select",
+    "id": "text_alignment",
+    "label": "Text alignment",
+    "options": [
+        {
+        "value": "left",
+        "label": "Left"
+        },
+        {
+        "value": "center",
+        "label": "Center"
+        },
+        {
+        "value": "right",
+        "label": "Right"
+        }
+    ],
+    "default": "left"
+  },
+  {
+    "type": "text",
+    "id": "page_hero_title",
+    "label": "Hero title"
+  },
+  {
+    "type": "text",
+    "id": "page_hero_subtitle",
+    "label": "Hero subtitle"
+  },
+  {
+    "type": "text",
+    "id": "page_hero_link_text",
+    "label": "Button text"
+  },
+  {
+    "type": "url",
+    "id": "page_hero_link",
+    "label": "Button link"
+  }
+]
+}
+{% endschema %}

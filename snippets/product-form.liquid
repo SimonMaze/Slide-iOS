@@ -1,0 +1,7 @@
+{% form "product", product %}
+{% if product.variants.size > 1 %}
+{% render 'product-variants' %}
+{% else %}
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+{% endif %}
+{% endform %}

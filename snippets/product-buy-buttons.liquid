@@ -1,0 +1,29 @@
+{%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+{% if product.has_only_default_variant %}
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+  {% else %}
+  <!-- Master selector -->
+<select id="product-select" name="id">
+  {% for variant in product.variants %}
+  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %} data-variant-price="{% if variant.available %}{{ variant.price | money }}{% else %}OUT_OF_STOCK_LABEL{% endif %}">
+    {{ variant.title }} - {{ variant.price | money }}
+  </option>
+  {% endfor %}
+</select>
+{% endif %}
+
+<input type="number" name="quantity" min="1" value="1">
+
+<div id="add-to-cart-button">
+  {% if product.available %}
+  <input type="submit" id="add-to-cart" value="Add to cart">
+
+  <div id="payment-button" class="payment-button">
+    <p>or</p>
+    {{ form | payment_button }}
+  </div>
+  {% else %}
+  <input style="display: flex" type="button" disabled="disabled" value="Sold out">
+  {% endif %}
+</div>
+{%- endform -%}

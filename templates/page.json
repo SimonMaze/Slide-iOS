@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "section-hero",
+      "settings": {
+        "horizontal_alignment": "center",
+        "text_alignment": "center",
+        "page_hero_title": "About us",
+        "page_hero_subtitle": "All about us",
+        "page_hero_link_text": "Learn more",
+        "page_hero_link": "shopify:\/\/products\/black-leather-bag"
+      }
+    },
+    "main": {
+      "type": "page",
+      "settings": {
+        "container_width": "default",
+        "show_breadcrumb": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "main"
+  ]
+}

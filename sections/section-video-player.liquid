@@ -1,0 +1,46 @@
+<div class="container">
+  <div>
+    {% if section.settings.video_url.type == 'youtube' %}
+    {% render 'youtube-player', video_url: section.settings.video_url %}
+    {% else %}
+    {% render 'vimeo-player' %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video player",
+  "class": "video-player",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Video title"
+    },
+    {
+      "id": "video_url",
+      "type": "video_url",
+      "label": "Video URL",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "info": "text",
+      "placeholder": "text"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Video",
+      "name": "Video player",
+      "settings": {
+        "header": "Video title"
+      }
+    }
+  ]
+}
+{% endschema %}
