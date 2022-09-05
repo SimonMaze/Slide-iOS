@@ -1,36 +1,36 @@
 PODS:
-  - DTCoreText (1.6.26):
-    - DTCoreText/Core (= 1.6.26)
+  - DTCoreText (1.6.26.1):
+    - DTCoreText/Core (= 1.6.26.1)
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTCoreText/Core (1.6.26):
+  - DTCoreText/Core (1.6.26.1):
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTFoundation/Core (1.7.16)
-  - DTFoundation/DTAnimatedGIF (1.7.16)
-  - DTFoundation/DTHTMLParser (1.7.16):
+  - DTFoundation/Core (1.7.18)
+  - DTFoundation/DTAnimatedGIF (1.7.18)
+  - DTFoundation/DTHTMLParser (1.7.18):
     - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.16):
+  - DTFoundation/UIKit (1.7.18):
     - DTFoundation/Core
   - HTMLSpecialCharacters (1.3.6)
   - LicensesViewController (0.7.0)
-  - MaterialComponents/ActivityIndicator (124.1.1):
+  - MaterialComponents/ActivityIndicator (124.2.0):
     - MaterialComponents/Palettes
     - MaterialComponents/private/Application
     - MDFInternationalization
     - MotionAnimator (~> 4.0)
-  - MaterialComponents/Palettes (124.1.1)
-  - MaterialComponents/private/Application (124.1.1)
-  - MaterialComponents/private/Math (124.1.1)
-  - MaterialComponents/ProgressView (124.1.1):
+  - MaterialComponents/Palettes (124.2.0)
+  - MaterialComponents/private/Application (124.2.0)
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/ProgressView (124.2.0):
     - MaterialComponents/Palettes
     - MaterialComponents/private/Math
     - MDFInternationalization
-  - MDFInternationalization (2.0.0)
+  - MDFInternationalization (3.0.0)
   - MiniKeychain (1.0.8)
   - MKColorPicker (1.2)
   - MotionAnimator (4.0.1):
@@ -48,10 +48,10 @@ PODS:
   - SwiftEntryKit (1.2.1):
     - QuickLayout (= 3.0.0)
   - SwiftLinkPreview (3.0.1)
-  - SwiftLint (0.43.1)
+  - SwiftLint (0.47.0)
   - SwiftyJSON (5.0.0)
   - TGPControls (5.1.0)
-  - YoutubePlayer-in-WKWebView (0.3.5)
+  - YoutubePlayer-in-WKWebView (0.3.8)
 
 DEPENDENCIES:
   - DTCoreText (from `https://github.com/Cocoanetics/DTCoreText`)
@@ -110,7 +110,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   DTCoreText:
-    :commit: c4cb9c9aa8bf245bcbf270335f02ac440a3f72a3
+    :commit: 9f515155c6fcb5d9c39150aa048685aa65b4904f
     :git: https://github.com/Cocoanetics/DTCoreText
   MKColorPicker:
     :commit: e76cd225ff60f12f8ec0052e39e5e307a32c0762
@@ -132,12 +132,12 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ccrama/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  DTCoreText: ec749e013f2e1f76de5e7c7634642e600a7467ce
-  DTFoundation: e7781d9fd2f202bfd451fbbf8cab71ce83b46498
+  DTCoreText: 7b0a0cc56186a570211f0308cd4b3fb7049fe9a9
+  DTFoundation: a53f8cda2489208cbc71c648be177f902ee17536
   HTMLSpecialCharacters: edc707cc4bcdc92eb3b9551de8cff94c1e6f9a19
   LicensesViewController: 2f7bba13b3cec7516d4990e41df297720fdbaaab
-  MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
-  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MiniKeychain: 5d424fcd50fb8ab4cc946db2c3415dc391ffffdc
   MKColorPicker: 8998b2ab977e4f240fdf254db27a18b810da3cfc
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
@@ -151,11 +151,11 @@ SPEC CHECKSUMS:
   SubtleVolume: 101038d203018736bcd1df3ac95bcc0f6b8640ce
   SwiftEntryKit: 1661b766dd22b07679e6ebb326ccfbd81ceb0a20
   SwiftLinkPreview: 7524438c43bf63a5041615713777c3d8f19a9a31
-  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
   SwiftyJSON: f0574c07d8ca1644050db687067209e3033a89a0
   TGPControls: 52c0770bee9c9aee364f1559cc627fc01ea5e8b2
-  YoutubePlayer-in-WKWebView: cfbf46da51d7370662a695a8f351e5fa1d3e1008
+  YoutubePlayer-in-WKWebView: 4fca3b4f6f09940077bfbae7bddb771f2b43aacd
 
 PODFILE CHECKSUM: 11d5327e7fce051cd3b3ec699136a01fb7ad5b71
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.3

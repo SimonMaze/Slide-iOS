@@ -48,7 +48,7 @@ public class PagingTitleCollectionView: UIView, UICollectionViewDataSource, UICo
         self.collectionViewLayout = FadingCollectionViewLayout(scrollDirection: .horizontal)
 
         if self is TabsPagingTitleCollectionView {
-            (self.collectionViewLayout as? FadingCollectionViewLayout)?.shouldFade = false
+            (self.collectionViewLayout)?.shouldFade = false
         }
         
         self.collectionViewLayout.delegate = self

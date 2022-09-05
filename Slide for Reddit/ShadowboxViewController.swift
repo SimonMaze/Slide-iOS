@@ -122,7 +122,7 @@ class ShadowboxViewController: SwipeDownModalVC, UIPageViewControllerDataSource,
             } else {
                 self.viewToMove = link.topBody
             }
-            currentIndex = submissionDataSource.content.firstIndex(where: {$0.getId() == link.submission?.getId()}) ?? 0
+            currentIndex = submissionDataSource.content.firstIndex(where: { $0.getId() == link.submission?.getId() }) ?? 0
         }
     }
     

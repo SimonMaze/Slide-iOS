@@ -416,7 +416,6 @@ public class ToolbarTextView: NSObject {
                     }
                 }
                 
-
                 AF.upload(multipartFormData: { (multipartFormData) in
                     multipartFormData.append(data!, withName: "image", fileName: name, mimeType: mime! as String)
                     for (key, value) in parameters {
@@ -452,7 +451,6 @@ public class ToolbarTextView: NSObject {
         }
     }
 
-    
     // iOS 14 impelentation
     @available(iOS 14, *)
     func uploadAsync(_ results: [PHPickerResult]) {

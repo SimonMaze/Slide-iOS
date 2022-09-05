@@ -77,28 +77,28 @@ public extension UIColor {
     
     var redValue: CGFloat {
         if cgColor.components != nil && cgColor.components!.count >= 1 {
-            return cgColor.components! [0]
+            return cgColor.components![0]
         }
         return 0
     }
     
     var greenValue: CGFloat {
         if cgColor.components != nil && cgColor.components!.count >= 2 {
-            return cgColor.components! [1]
+            return cgColor.components![1]
         }
         return 0
     }
     
     var blueValue: CGFloat {
         if cgColor.components != nil && cgColor.components!.count >= 3 {
-            return cgColor.components! [2]
+            return cgColor.components![2]
         }
         return 0
     }
     
     var alphaValue: CGFloat {
         if cgColor.components != nil && cgColor.components!.count >= 4 {
-            return cgColor.components! [3]
+            return cgColor.components![3]
         }
         return 0
     }

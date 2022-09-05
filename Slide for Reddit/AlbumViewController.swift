@@ -254,7 +254,6 @@ class AlbumViewController: SwipeDownModalVC, UIPageViewControllerDataSource, UIP
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.automaticallyAdjustsScrollViewInsets = false
         self.edgesForExtendedLayout = UIRectEdge.all
         self.extendedLayoutIncludesOpaqueBars = true
         self.view.backgroundColor = UIColor.black
@@ -299,7 +298,7 @@ class AlbumViewController: SwipeDownModalVC, UIPageViewControllerDataSource, UIP
         let closeB = UIBarButtonItem.init(customView: close)
         navItem?.leftBarButtonItem = closeB
         
-        spinnerIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        spinnerIndicator = UIActivityIndicatorView(style: .large)
         spinnerIndicator.center = self.view.center
         spinnerIndicator.color = UIColor.white
         self.view.addSubview(spinnerIndicator)

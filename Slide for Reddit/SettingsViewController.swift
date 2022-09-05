@@ -81,6 +81,7 @@ class SettingsViewController: MediaTableViewController, MFMailComposeViewControl
         let barButton = UIBarButtonItem.init(customView: button)
         
         navigationItem.leftBarButtonItem = barButton
+
     }
     
     @objc func onPro() {

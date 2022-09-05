@@ -196,7 +196,7 @@ public class ColorPickerViewController: UIViewController {
             self.layer.needsLayout()
         }
     }
-    @IBInspectable var maximumValueImage: UIImage? = nil { // default is nil. image that appears to right of control (e.g. speaker max)
+    @IBInspectable var maximumValueImage: UIImage? { // default is nil. image that appears to right of control (e.g. speaker max)
         didSet {
             if let img = maximumValueImage {
                 let imgLayer = _maxTrackImageLayer ?? {

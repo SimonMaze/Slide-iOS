@@ -964,7 +964,7 @@ extension VideoMediaViewController {
                 strongSelf.ytButton.isHidden = false
             }
             
-            //Notify other videos to end
+            // Notify other videos to end
             NotificationCenter.default.post(name: .onYouTubeWillStart, object: nil)
             
             if !playlist.isEmpty {

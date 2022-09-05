@@ -20,7 +20,7 @@ import UIKit
 // MARK: - Base
 class SingleSubredditViewController: MediaViewController, AutoplayScrollViewDelegate {
     var currentPlayingIndex = [IndexPath]()
-    public static let subredditIntent = "me.ccrama.redditslide.OpenSubreddit"
+    public static let subredditIntent = "com.maze.redditslide.OpenSubreddit"
     
     var isScrollingDown = true
     var emptyStateView = EmptyStateView()
@@ -136,7 +136,6 @@ class SingleSubredditViewController: MediaViewController, AutoplayScrollViewDele
 
     var searchText: String?
 
-    
     var refreshControl: UIRefreshControl!
 
     var hasHeader = false
@@ -1275,7 +1274,6 @@ class SingleSubredditViewController: MediaViewController, AutoplayScrollViewDele
         dataSource.hideReadPosts { [weak self] (indexPaths: [IndexPath]) in
             guard let self = self else { return }
             
-            
             func containsTopIndex() -> Bool {
                 if topIndex == 0 {
                     return false
@@ -1292,8 +1290,7 @@ class SingleSubredditViewController: MediaViewController, AutoplayScrollViewDele
             while containsTopIndex() {
                 topIndex -= 1
             }
-            
-            
+                        
             DispatchQueue.main.async {
                 if !indexPaths.isEmpty {
                     self.tableView.performBatchUpdates({

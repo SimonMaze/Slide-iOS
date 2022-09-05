@@ -390,9 +390,8 @@ class OnboardingTFViewController: UIViewController {
         $0.backgroundColor = UIColor(hexString: "#F95200")
         $0.titleLabel?.textColor = .white
         $0.tintColor = .white
-        $0.addTarget(self, action: #selector(subTapped), for: UIControl.Event.touchUpInside)
+        $0.addTarget(OnboardingTFViewController.self, action: #selector(subTapped), for: UIControl.Event.touchUpInside)
         $0.isEnabled = true
-        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         $0.layer.cornerRadius = 25
         $0.setImage(Subscriptions.subreddits.contains("slide_ios_beta") ? UIImage(sfString: SFSymbol.checkmark, overrideString: "selected") : UIImage(sfString: SFSymbol.plus, overrideString: "ad"), for: .normal)
         $0.setTitle(Subscriptions.subreddits.contains("slide_ios_beta") ? "   You're subscribed!" : "   Subscribe", for: .normal)

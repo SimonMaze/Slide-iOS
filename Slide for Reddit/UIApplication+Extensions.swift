@@ -17,7 +17,7 @@ extension UIApplication {
 
 extension UIDevice {
     public func isMac() -> Bool {
-        return false //Disable new Mac features for now
+        return false // Disable new Mac features for now
         if #available(iOS 14.0, *) {
             return ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp
         } else if #available(iOS 13.0, *) {

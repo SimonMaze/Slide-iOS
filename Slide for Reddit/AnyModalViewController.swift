@@ -578,14 +578,12 @@ class AnyModalViewController: UIViewController {
             $0.accessibilityIdentifier = "More Button"
             $0.accessibilityLabel = "More"
             $0.setImage(UIImage(sfString: SFSymbol.ellipsis, overrideString: "moreh")?.navIcon(true), for: [])
-            $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
         
         downloadButton = UIButton().then {
             $0.accessibilityIdentifier = "Download Button"
             $0.accessibilityLabel = "Download"
             $0.setImage(UIImage(sfString: SFSymbol.squareAndArrowDownFill, overrideString: "download")?.navIcon(true), for: [])
-            $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
         
         upvoteButton = UIButton().then {
@@ -593,14 +591,12 @@ class AnyModalViewController: UIViewController {
             $0.accessibilityLabel = "Upvote"
             $0.setImage(UIImage(sfString: SFSymbol.arrowUp, overrideString: "upvote")?.navIcon(true).getCopy(withColor: isUpvoted ? ColorUtil.upvoteColor : UIColor.white), for: [])
             $0.isHidden = upvoteCallback == nil // The button will be unhidden once the content has loaded.
-            $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
 
         muteButton = UIButton().then {
             $0.accessibilityIdentifier = "Toggle Mute"
             $0.isHidden = true
             $0.accessibilityLabel = "Toggle Mute"
-            $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
 
         goToCommentsButton = UIButton().then {
@@ -608,7 +604,6 @@ class AnyModalViewController: UIViewController {
             $0.accessibilityLabel = "Go to comments"
             $0.setImage(UIImage(sfString: SFSymbol.bubbleLeftAndBubbleRightFill, overrideString: "comments")?.navIcon(true), for: [])
             $0.isHidden = commentCallback == nil
-            $0.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
 
         closeButton.setImage(UIImage(sfString: SFSymbol.xmark, overrideString: "close")?.navIcon(true), for: .normal)
@@ -688,7 +683,7 @@ class AnyModalViewController: UIViewController {
     var lastTracks = false
     
     func showSpinner() {
-        spinnerIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        spinnerIndicator = UIActivityIndicatorView(style: .large)
         spinnerIndicator.center = self.view.center
         spinnerIndicator.color = UIColor.white
         self.view.addSubview(spinnerIndicator)

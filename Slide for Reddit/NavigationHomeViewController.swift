@@ -1019,7 +1019,7 @@ class CurrentAccountHeaderView: UIView {
         $0.clipsToBounds = true
         $0.layer.masksToBounds = true
         if !SettingValues.reduceElevation { // Let's just keep this rounded...
-            //$0.elevate(elevation: 2.0)
+            // $0.elevate(elevation: 2.0)
         }
     }
     

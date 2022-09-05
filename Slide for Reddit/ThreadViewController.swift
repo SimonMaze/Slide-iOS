@@ -93,7 +93,7 @@ class ThreadViewControler: MediaViewController, UICollectionViewDelegate, Wrappi
         var items: [UIBarButtonItem] = []
         items.append(space)
         
-        var replyTo = AccountController.currentName //Fallback if no replies have been sent by other user
+        var replyTo = AccountController.currentName // Fallback if no replies have been sent by other user
         if let last = self.baseData.content.last(where: { $0.author != AccountController.currentName }) {
             replyTo = last.author
         } else if let last = self.baseData.content.last {
