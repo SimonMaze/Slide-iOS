@@ -1458,3 +1458,42 @@ extension AppDelegate: NSToolbarDelegate {
 }
 #endif
 
+extension UINavigationBar {
+static let defaultBackgroundColor = UIColor.red
+static let defaultTintColor = UIColor.white
+
+func setOpaque() {
+    if #available(iOS 15, *) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UINavigationBar.defaultBackgroundColor
+        appearance.titleTextAttributes = [.foregroundColor: UINavigationBar.defaultTintColor]
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    } else {
+        setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.defaultPrompt)
+        shadowImage = UIImage()
+        barTintColor = UINavigationBar.defaultBackgroundColor
+        titleTextAttributes = [.foregroundColor: UINavigationBar.defaultTintColor]
+    }
+    isTranslucent = false
+    tintColor = UINavigationBar.defaultTintColor
+}
+
+func setTranslucent(tintColor: UIColor, titleColor: UIColor) {
+    if #available(iOS 15, *) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.titleTextAttributes = [.foregroundColor: titleColor]
+        standardAppearance = appearance
+        scrollEdgeAppearance = appearance
+    } else {
+        titleTextAttributes = [.foregroundColor: titleColor]
+        setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        shadowImage = UIImage()
+    }
+    isTranslucent = true
+    self.tintColor = tintColor
+}
+}
