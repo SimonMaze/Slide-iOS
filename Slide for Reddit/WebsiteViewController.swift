@@ -37,6 +37,8 @@ class WebsiteViewController: MediaViewController, WKNavigationDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("***###View")
+        
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
 
@@ -57,6 +59,19 @@ class WebsiteViewController: MediaViewController, WKNavigationDelegate {
         navigationController?.setToolbarHidden(false, animated: false)
         navigationController?.toolbar.barTintColor = UIColor.backgroundColor
         navigationController?.toolbar.tintColor = UIColor.fontColor
+        
+        let navBar = self.navigationController!.navigationBar
+
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+
+        let compactAppearance = standardAppearance.copy()
+
+        navBar.standardAppearance = standardAppearance
+        navBar.scrollEdgeAppearance = standardAppearance
+        navBar.compactAppearance = compactAppearance
+        navBar.compactScrollEdgeAppearance = compactAppearance
+        
     }
     
     func updateToolbar() {
